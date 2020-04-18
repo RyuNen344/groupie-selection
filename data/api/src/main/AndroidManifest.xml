@@ -1,1 +1,6 @@
-<manifest package="com.ryunen344.selection.api" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ryunen344.selection.api">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+</manifest>

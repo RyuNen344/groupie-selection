@@ -31,6 +31,9 @@ dependencies {
     implementation Dep.AndroidX.LiveData.liveDataCoreKtx
     implementation Dep.AndroidX.LiveData.liveDataKtx
 
+    implementation Dep.Koin.android
+    implementation Dep.Koin.scope
+
     testImplementation Dep.Test.junit
     androidTestImplementation Dep.Test.androidJunit4Ktx
     androidTestImplementation Dep.Test.espressoCore

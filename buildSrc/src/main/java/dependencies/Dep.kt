@@ -33,6 +33,8 @@ object Dep {
         const val emoji = "androidx.emoji:emoji-appcompat:1.0.0"
         const val design = "com.google.android.material:material:1.2.0-alpha06"
         const val fragmentKtx = "androidx.fragment:fragment-ktx:1.2.4"
+        const val recyclerView = "androidx.recyclerview:recyclerview:1.1.0"
+        const val recyclerViewSelection = "androidx.recyclerview:recyclerview-selection:1.1.0-rc01"
 
         object LiveData {
             private const val version = "2.2.0"
@@ -67,6 +69,15 @@ object Dep {
         }
     }
 
+    object Koin {
+        private const val version = "2.1.5"
+        const val android = "org.koin:koin-android:$version"
+        const val scope = "org.koin:koin-androidx-scope:$version"
+        const val viewmodel = "org.koin:koin-androidx-viewmodel:$version"
+        const val fragment = "org.koin:koin-androidx-fragment:$version"
+
+    }
+
     object Ktor {
         private const val version = "1.3.1"
         const val clientCore = "io.ktor:ktor-client-core:$version"
@@ -84,7 +95,7 @@ object Dep {
     object Groupie {
         private const val version = "2.8.0"
         const val groupie = "com.xwray:groupie:$version"
-        const val databinding = "com.xwray:groupie-databinding:$version"
+        const val viewbinding = "com.xwray:groupie-viewbinding:$version"
     }
 
     object Coil {

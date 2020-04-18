@@ -30,5 +30,10 @@ dependencies {
     implementation Dep.AndroidX.Navigation.runtimeKtx
     implementation Dep.AndroidX.Navigation.fragmentKtx
 
+    implementation Dep.Koin.android
+    implementation Dep.Koin.scope
+    implementation Dep.Koin.viewmodel
+    implementation Dep.Koin.fragment
+
     api Dep.Timber.android
 }

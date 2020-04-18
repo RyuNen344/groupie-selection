@@ -8,7 +8,14 @@ plugins {
 }
 
 apply from: rootProject.file('gradle/android.gradle')
-android.dataBinding.enabled = true
+
+android {
+    defaultConfig {
+        buildConfigField "String", "API_ENDPOINT", "\"https://api.github.com\""
+    }
+
+    dataBinding.enabled = true
+}
 
 dependencies {
 
@@ -24,6 +31,9 @@ dependencies {
 
     implementation Dep.AndroidX.coreKtx
     implementation Dep.AndroidX.appCompat
+
+    implementation Dep.Koin.android
+    implementation Dep.Koin.scope
 
     api Dep.Klock.common
 

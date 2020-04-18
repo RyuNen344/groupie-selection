@@ -56,6 +56,11 @@ dependencies {
     implementation Dep.Kotlin.Coroutines.coroutines
     implementation Dep.Kotlin.Coroutines.coroutinesAndroid
 
+    implementation Dep.Koin.android
+    implementation Dep.Koin.scope
+    implementation Dep.Koin.viewmodel
+    implementation Dep.Koin.fragment
+
     implementation Dep.Test.junit
     implementation Dep.Test.androidJunit4Ktx
 }
@@ -65,7 +70,7 @@ releasesHub {
     dependenciesClassNames = ["Dep.kt"]
     pullRequestEnabled = true
     gitHubRepositoryOwner = "RyuNen344"
-    gitHubRepositoryName = "android-template"
+    gitHubRepositoryName = "groupie-selection"
     pullRequestsMax = 2
     gitHubUserName = "RyuNen344"
     gitHubUserEmail = "s1100633@outlook.com"

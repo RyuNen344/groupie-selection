@@ -1,6 +1,6 @@
 package dependencies
 
 object Packages {
-    const val name = "com.ryunen344.selection.template.mmlicensetoolsplugindemo"
+    const val name = "com.ryunen344.selection"
     const val debugNameSuffix = ".debug"
 }
