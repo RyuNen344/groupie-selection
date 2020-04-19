@@ -63,15 +63,14 @@ class RepositoryRecyclerView @JvmOverloads constructor(
         ItemDetailsLookup<Long>() {
         override fun getItemDetails(e: MotionEvent): ItemDetails<Long>? =
             repositoryRecyclerView.findChildViewUnder(e.x, e.y)?.let {
-                (repositoryRecyclerView.getChildViewHolder(it) as GroupieViewHolder).getItemDetails()
+                val selectionKey = repositoryRecyclerView.getChildItemId(it)
+                val position = repositoryRecyclerView.getChildLayoutPosition(it)
+
+                return@let object : ItemDetailsLookup.ItemDetails<Long>() {
+                    override fun getSelectionKey(): Long? = selectionKey
+
+                    override fun getPosition(): Int = position
+                }
             }
-    }
-
-    private fun GroupieViewHolder.getItemDetails(): ItemDetailsLookup.ItemDetails<Long> {
-        return object : ItemDetailsLookup.ItemDetails<Long>() {
-            override fun getSelectionKey(): Long? = item.id
-
-            override fun getPosition(): Int = adapterPosition
-        }
     }
 }

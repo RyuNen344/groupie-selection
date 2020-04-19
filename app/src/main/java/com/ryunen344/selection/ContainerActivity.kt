@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.ryunen344.selection.databinding.ActivityContainerBinding
+import org.koin.androidx.fragment.android.setupKoinFragmentFactory
 
 class ContainerActivity : AppCompatActivity() {
 
@@ -14,6 +15,7 @@ class ContainerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityContainerBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setupKoinFragmentFactory()
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView<ActivityContainerBinding>(this, R.layout.activity_container).also {

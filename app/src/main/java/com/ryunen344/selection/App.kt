@@ -7,6 +7,7 @@ import com.ryunen344.selection.repository.repositoryModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger
+import org.koin.androidx.fragment.koin.fragmentFactory
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import timber.log.LogcatTree
@@ -21,6 +22,7 @@ class App : Application() {
             androidLogger(Level.DEBUG)
             androidContext(this@App)
             androidFileProperties()
+            fragmentFactory()
             modules(apiModule, repositoryModule, homeModule)
         }
 
