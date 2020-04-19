@@ -2,6 +2,12 @@ package com.ryunen344.selection.home
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.MotionEvent
+import androidx.recyclerview.selection.ItemDetailsLookup
+import androidx.recyclerview.selection.ItemKeyProvider
+import androidx.recyclerview.selection.SelectionTracker
+import androidx.recyclerview.selection.StorageStrategy
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.ryunen344.selection.model.Repository
 import com.xwray.groupie.GroupAdapter
@@ -13,10 +19,22 @@ class RepositoryRecyclerView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : RecyclerView(context, attrs, defStyle) {
 
+    var selectionTracker: SelectionTracker<Long>
+
     private val groupAdapter: GroupAdapter<GroupieViewHolder> by lazy { GroupAdapter<GroupieViewHolder>() }
 
     init {
+        addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        groupAdapter.setHasStableIds(true)
         adapter = groupAdapter
+
+        selectionTracker = SelectionTracker.Builder<Long>(
+            "repository-selection-id",
+            this,
+            RepositoryIdKeyProvider(this),
+            RepositoryLookup(this),
+            StorageStrategy.createLongStorage()
+        ).build()
     }
 
     var repositories: List<Repository>? = null
@@ -29,6 +47,31 @@ class RepositoryRecyclerView @JvmOverloads constructor(
         val repositories = repositories ?: return
 
         groupAdapter.clear()
-        groupAdapter.addAll(repositories.map { RepositoryItem(it) })
+        groupAdapter.addAll(repositories.map { RepositoryItem(selectionTracker, it) })
+    }
+
+    inner class RepositoryIdKeyProvider(private val repositoryRecyclerView: RepositoryRecyclerView) :
+        ItemKeyProvider<Long>(SCOPE_MAPPED) {
+
+        override fun getKey(position: Int): Long? = repositoryRecyclerView.groupAdapter.getItem(position).id
+
+        override fun getPosition(key: Long): Int =
+            repositoryRecyclerView.findViewHolderForItemId(key)?.adapterPosition ?: 0
+    }
+
+    inner class RepositoryLookup(private val repositoryRecyclerView: RepositoryRecyclerView) :
+        ItemDetailsLookup<Long>() {
+        override fun getItemDetails(e: MotionEvent): ItemDetails<Long>? =
+            repositoryRecyclerView.findChildViewUnder(e.x, e.y)?.let {
+                (repositoryRecyclerView.getChildViewHolder(it) as GroupieViewHolder).getItemDetails()
+            }
+    }
+
+    private fun GroupieViewHolder.getItemDetails(): ItemDetailsLookup.ItemDetails<Long> {
+        return object : ItemDetailsLookup.ItemDetails<Long>() {
+            override fun getSelectionKey(): Long? = item.id
+
+            override fun getPosition(): Int = adapterPosition
+        }
     }
 }
